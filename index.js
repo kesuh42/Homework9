@@ -15,8 +15,9 @@ inquirer.prompt([
         message: "What is your favorite color?",
         choices: ["red", "blue", "yellow", "green", "purple", "orange", "pink"]
     }
-]).then(function(data){
-    axios.get(`https://api.github.com/users/${data.github}`).then(function(data){
+]).then(function(inquiry){
+    axios.get(`https://api.github.com/users/${inquiry.github}`).then(function(axiosCall){
+        console.log(inquiry)
         var templateHTML = `
         <!DOCTYPE html>
             <html>
@@ -27,24 +28,24 @@ inquirer.prompt([
 
                 <body>
                     <div class="card">
-                        <img src="https://avatars3.githubusercontent.com/u/55920932?v=4" alt="Avatar">
+                        <img src="${axiosCall.data.avatar_url}" alt="Avatar">
                         <div class="container">
                         <div><b>Hi!</b></div>
-                        <div><b>My name is ${data.login}</b></div>
-                        <div>{data.bio}</div>
-                        <a href="https://www.google.com/maps/place/${data.location}">Location</a> <a href="https://github.com/${data.login}">Github</a> <a href="#">Blog?</a>
+                        <div><b>My name is ${axiosCall.data.login}</b></div>
+                        <div>${axiosCall.data.bio}</div>
+                        <a href="https://www.google.com/maps/place/${axiosCall.data.location}">Location</a> <a href="https://github.com/${axiosCall.data.login}">Github</a> <a href="#">Blog?</a>
                         </div>
                     </div>
                     
                     <div class="card2">
                         <div class="container">
-                            <div><b>Public Repositories: ${data.public_repos}</b></div>
+                            <div><b>Public Repositories: ${axiosCall.data.public_repos}</b></div>
                         </div>
                     </div>
 
                     <div class="card2">
                         <div class="container">
-                            <div><b>Followers: ${data.followers}</b></div>
+                            <div><b>Followers: ${axiosCall.data.followers}</b></div>
                         </div>
                     </div>
 
@@ -56,12 +57,13 @@ inquirer.prompt([
 
                     <div class="card2">
                         <div class="container">
-                            <div><b>Following: ${data.following}</b></div>
+                            <div><b>Following: ${axiosCall.data.following}</b></div>
                     </div>
                     </div>
                 </body>
             </html>
         `
+        
         var templateCSS = `
         body {
             background-color: grey;
@@ -80,7 +82,7 @@ inquirer.prompt([
               transition: 0.3s;
               border-radius: 5px;
               width: calc(100%-40px);
-              background-color: pink;
+              background-color: ${inquiry.color};
               text-align: center;
               font-size: 32px;
               padding: 20px;
@@ -100,7 +102,7 @@ inquirer.prompt([
               transition: 0.3s;
               border-radius: 5px;
               width: 50%;
-              background-color: pink;
+              background-color: ${inquiry.color};
               text-align: center;
               font-size: 32px;
               padding: 20px;
@@ -126,9 +128,11 @@ inquirer.prompt([
                     throw err
                 }
             })
+
+    })
+}).then(function(){
+    var html = fs.readFileSync('./index.html', 'utf8')
+    pdf.create(html).toFile("./index.pdf", function(err, res) {
+        console.log(res);
     })
 })
-
-pdf.create(index.html).toFile('index.pdf', function(err, res) {
-    if (err) return console.log(err);
-  });
