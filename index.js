@@ -17,7 +17,6 @@ inquirer.prompt([
     }
 ]).then(function(data){
     axios.get(`https://api.github.com/users/${data.github}`).then(function(data){
-        var starsVar = "${data.length}"
         var templateHTML = `
         <!DOCTYPE html>
             <html>
