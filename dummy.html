@@ -1,17 +1,43 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Developer Profile Generator</title>
-            <link rel="stylesheet" type="text/css" href="dummycss.css">
-        </head>
+<html>
+    <head>
+        <title>Developer Profile Generator</title>
+        <link rel="stylesheet" type="text/css" href="dummycss.css">
+    </head>
 
-        <body>
-            <div class="card">
-                <img src="img_avatar.png" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>John Doe</b></h4>
-                  <p>Architect & Engineer</p>
-                </div>
-              </div>
-        </body>
-    </html>
+    <body>
+        <div class="card">
+            <img src="https://avatars3.githubusercontent.com/u/55920932?v=4" alt="Avatar">
+            <div class="container">
+            <div><b>Hi!</b></div>
+            <div><b>My name is ${data.login}</b></div>
+            <div>{data.bio}</div>
+            <a href="https://www.google.com/maps/place/${data.location}">Location</a> <a href="https://github.com/${data.login}">Github</a> <a href="#">Blog?</a>
+            </div>
+        </div>
+        
+        <div class="card2">
+            <div class="container">
+                <div><b>Public Repositories: ${data.public_repos}</b></div>
+            </div>
+        </div>
+
+        <div class="card2">
+            <div class="container">
+                <div><b>Followers: ${data.followers}</b></div>
+            </div>
+        </div>
+
+        <div class="card2">
+            <div class="container">
+            <div><b>Github Stars: 0</b></div>
+        </div>
+        </div>
+
+        <div class="card2">
+            <div class="container">
+                <div><b>Following: ${data.following}</b></div>
+        </div>
+        </div>
+    </body>
+</html>
