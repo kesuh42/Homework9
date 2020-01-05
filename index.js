@@ -87,7 +87,7 @@ inquirer.prompt([
                         <div><b>Hi!</b></div>
                         <div><b>My name is ${axiosCall.data.login}</b></div>
                         <div>${axiosCall.data.bio}</div>
-                        <a href="https://www.google.com/maps/place/${axiosCall.data.location}">Location</a> <a href="https://github.com/${axiosCall.data.login}">Github</a> <a href="#">Blog?</a>
+                        <a href="https://www.google.com/maps/place/${axiosCall.data.location}">Location</a> <a href="https://github.com/${axiosCall.data.login}">Github</a> <a href="${axiosCall.data.blog}">Blog?</a>
                         </div>
                     </div>
                     
